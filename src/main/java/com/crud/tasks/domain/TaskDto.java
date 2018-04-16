@@ -1,9 +1,9 @@
 package com.crud.tasks.domain;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-//nie działa mi ani import ani adnotacja
 @Getter
 @AllArgsConstructor
 public class TaskDto {
