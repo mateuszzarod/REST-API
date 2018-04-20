@@ -2,10 +2,7 @@ package com.crud.tasks.controller;
 
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +42,7 @@ public class TaskController {
     @RequestMapping(
             method = RequestMethod.POST,
             value = "createTask")
-    public void createTask(TaskDto taskDto){
+    public void createTask(@RequestBody TaskDto taskDto){
         System.out.println("Hello");
     }
 }
