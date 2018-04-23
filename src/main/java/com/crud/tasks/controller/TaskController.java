@@ -36,7 +36,7 @@ public class TaskController {
     }
 
     @RequestMapping(
-            method = RequestMethod.POST,
+            method = RequestMethod.GET,
             value = "getTaskById"
     )
     public TaskDto getTask(Long id){
