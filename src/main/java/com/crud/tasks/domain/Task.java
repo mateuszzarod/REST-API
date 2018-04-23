@@ -20,6 +20,4 @@ public class Task {
 
     @Column(name = "DESCRIPTION")
     private String content;
-
-
 }

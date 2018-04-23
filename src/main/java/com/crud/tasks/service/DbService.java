@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 //odpowiada za komunikację z bazą danych
 //wstrzykuje do siebie TaskRepository
@@ -18,7 +19,7 @@ public class DbService {
     private TaskRepository taskRepository;
 
     //opakowanie dla metody TaskRepository
-    public List<Task> getAllTasks(){
+    public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
 
@@ -27,10 +28,18 @@ public class DbService {
         return taskRepository.getTaskById(id);
     }
 
-    public Task saveTask(final Task task){
+    public Task saveTask(final Task task) {
         return taskRepository.save(task);
     }
 
+    public Optional<Task> getTask(final Long id) {
+        return taskRepository.findById(id);
+    }
 
-
+    public void deleteTask(final Long id) {
+        taskRepository.delete(id);
+    }
 }
+
+
+

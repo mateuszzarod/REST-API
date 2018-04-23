@@ -15,6 +15,14 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
     //zadanie 15.2
     Task getTaskById(Long id);
+
+    Optional<Task> findById(Long id);
+
+    //czy nadpisanie tej metody jest potrzebne?
+ /*   @Override
+    void delete (Long id);*/
+
 }
+
 
 

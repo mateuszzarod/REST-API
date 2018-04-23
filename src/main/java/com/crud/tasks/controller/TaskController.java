@@ -1,6 +1,5 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
@@ -16,6 +15,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/v1/task")
 public class TaskController {
+
     @Autowired
     private DbService service;
     @Autowired
@@ -39,28 +39,17 @@ public class TaskController {
             method = RequestMethod.GET,
             value = "getTaskById"
     )
-    public TaskDto getTask(Long id){
-        return taskMapper.mapToTaskDto(service.findOne(id));
+    public TaskDto getTask(@RequestParam Long taskId) throws TaskNotFoundException {
+        return taskMapper.mapToTaskDto(service.getTask(taskId).orElseThrow(TaskNotFoundException::new));
     }
+    //dlaczego tutaj jest getTask a nie getTaskbyId
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "getTask")
-    public TaskDto getTask(String taskID){
-        return new TaskDto((long)1, "test title", "test content" );
-    }
-
-    @RequestMapping(
-            method = RequestMethod.DELETE,
-            value = "deleteTask")
-    public void deleteTask(String taskDto){
-    }
 
     @RequestMapping(
             method = RequestMethod.PUT,
             value = "updateTask")
     public TaskDto updateTask(TaskDto taskDto){
-        return new TaskDto((long)1, "Edited test title", "Edited test content");
+        return taskMapper.mapToTaskDto(service.saveTask(taskMapper.mapToTask(taskDto)));
     }
 
     @RequestMapping(
@@ -71,4 +60,11 @@ public class TaskController {
         service.saveTask(taskMapper.mapToTask(taskDto));
     }
 
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            value = "deleteTask"
+    )
+    public void deleteTask(Long taskId){
+        service.deleteTask(taskId);
+    }
 }
