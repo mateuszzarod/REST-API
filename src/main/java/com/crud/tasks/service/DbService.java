@@ -26,6 +26,10 @@ public class DbService {
         return taskRepository.findOne(id);
     }
 
+    public Task saveTask(final Task task){
+        return taskRepository.save(task);
+    }
+
 
 
 }
