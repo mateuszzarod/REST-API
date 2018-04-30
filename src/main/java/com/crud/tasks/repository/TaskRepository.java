@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
-
+//repo
 public interface TaskRepository extends CrudRepository<Task, Long> {
     @Override
     List<Task> findAll();
@@ -13,14 +13,9 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Override
     Task save(Task task);
 
-    //zadanie 15.2
-    Task getTaskById(Long id);
-
     Optional<Task> findById(Long id);
 
-    //czy nadpisanie tej metody jest potrzebne?
- /*   @Override
-    void delete (Long id);*/
+
 
 }
 

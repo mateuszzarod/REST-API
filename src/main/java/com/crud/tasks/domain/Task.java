@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+//domain
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

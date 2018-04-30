@@ -1,5 +1,6 @@
 package com.crud.tasks.controller;
 
+import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
@@ -11,9 +12,10 @@ import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
-
+//controller
 @RestController
 @RequestMapping("/v1/task")
+@CrossOrigin(origins = "*")
 public class TaskController {
 
     @Autowired
@@ -30,25 +32,16 @@ public class TaskController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "getTaskList")
-    public List<TaskDto> getTaskList(){
-        return new ArrayList<>();
-    }
-
-    @RequestMapping(
-            method = RequestMethod.GET,
             value = "getTaskById"
     )
     public TaskDto getTask(@RequestParam Long taskId) throws TaskNotFoundException {
         return taskMapper.mapToTaskDto(service.getTask(taskId).orElseThrow(TaskNotFoundException::new));
     }
-    //dlaczego tutaj jest getTask a nie getTaskbyId
-
 
     @RequestMapping(
             method = RequestMethod.PUT,
             value = "updateTask")
-    public TaskDto updateTask(TaskDto taskDto){
+    public TaskDto updateTask(@RequestBody  TaskDto taskDto){
         return taskMapper.mapToTaskDto(service.saveTask(taskMapper.mapToTask(taskDto)));
     }
 
@@ -62,9 +55,10 @@ public class TaskController {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "deleteTask"
+            value = "deleteTask/{id}"
     )
-    public void deleteTask(Long taskId){
+
+    public void deleteTask(@PathVariable("id") Long taskId){
         service.deleteTask(taskId);
     }
 }

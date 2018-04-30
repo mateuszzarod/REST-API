@@ -23,9 +23,9 @@ public class DbService {
         return taskRepository.findAll();
     }
 
-    //zadanie 15.2
-    public Task findTaskById(final Long id) {
-        return taskRepository.getTaskById(id);
+
+    public Optional<Task> findTaskById(final Long id) {
+        return taskRepository.findById(id);
     }
 
     public Task saveTask(final Task task) {
