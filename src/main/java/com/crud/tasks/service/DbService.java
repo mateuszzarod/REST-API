@@ -23,7 +23,6 @@ public class DbService {
         return taskRepository.findAll();
     }
 
-
     public Optional<Task> findTaskById(final Long id) {
         return taskRepository.findById(id);
     }
