@@ -24,6 +24,7 @@ public class TrelloBoardDto {
     @Value("${trello.app.key}")
     private String trelloAppKey;
 
+    //pobiera wartości z aplication.properties
     @Value("${trello.app.token}")
     private String trelloAppToken;
 
@@ -33,7 +34,7 @@ public class TrelloBoardDto {
 
     public List<TrelloBoardDto> getTrelloBoards(){
 
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/kodillauser/boards")
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/m4tim4ti/boards")
                 .queryParam("key", trelloAppKey)
                 .queryParam("token", trelloAppToken)
                 .queryParam("fields", "name,id").build().encode().toUri();
