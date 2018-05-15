@@ -12,6 +12,7 @@ import java.util.Optional;
 //odpowiada za komunikację z bazą danych
 //wstrzykuje do siebie TaskRepository
 //inversion control
+//business operation
 
 @Service
 public class DbService {

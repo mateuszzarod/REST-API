@@ -18,16 +18,19 @@ public class TrelloClient {
 
     @Value("${trello.api.endpoint.prod}")
     private String trelloApiEndpoint;
-    @Value("$(trello.app.key}")
+    @Value("${trello.api.key}")
     private String trelloAppKey;
-    @Value("$(trello.app.token}")
+    @Value("${trello.api.token}")
     private String trelloToken;
+    @Value("${trello.api.username}")
+    private String trelloUsername;
 
     @Autowired
     private RestTemplate restTemplate;
 
+
     public List<TrelloBoardDto> getTrelloBoards() {
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/m4tim4ti/boards")
+        URI url = UriComponentsBuilder.fromHttpUrl(getHttpUrl())
                 .queryParam("key", trelloAppKey)
                 .queryParam("token", trelloToken)
                 .queryParam("fields", "name,id").build().encode().toUri();
@@ -38,5 +41,12 @@ public class TrelloClient {
             return Arrays.asList(boardResponse);
         }
         return new ArrayList<>();
+    }
+
+    private String getHttpUrl() {
+        return trelloApiEndpoint
+                + "/members/"
+                + trelloUsername
+                + "/boards";
     }
 }
