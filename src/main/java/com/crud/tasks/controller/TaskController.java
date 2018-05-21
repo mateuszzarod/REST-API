@@ -2,8 +2,10 @@ package com.crud.tasks.controller;
 
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
+import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
+import com.crud.tasks.trello.client.TrelloClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,8 +60,9 @@ public class TaskController {
             method = RequestMethod.DELETE,
             value = "deleteTask/{id}"
     )
-
-    public void deleteTask(@PathVariable("id") Long taskId){
+        public void deleteTask(@PathVariable("id") Long taskId){
         service.deleteTask(taskId);
     }
+
+
 }

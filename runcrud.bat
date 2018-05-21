@@ -1,3 +1,4 @@
+
 call gradlew build
 echo %ERRORLEVEL%
 if "%ERRORLEVEL%" == "0" goto rename
