@@ -11,11 +11,16 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 //makes bean during building context
+//Klient połączeń
+//Klasa, które jest odpowiedzialna za udostępnianie połączeń
+// i wykonywania operacji na zewnętrznym API
+
 @Component
 public class TrelloClient {
 
@@ -56,6 +61,9 @@ public class TrelloClient {
                 + "/boards";
     }
 
+
+
+    //typ CreatedTrelloCard
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto){
         URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/cards")
                 .queryParam("key", trelloAppKey)
@@ -64,8 +72,12 @@ public class TrelloClient {
                 .queryParam("desc", trelloCardDto.getDescription())
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId())
-                .queryParam("badge", trelloCardDto.getBadges()).build().encode().toUri();
+                .queryParam("badge", trelloCardDto.getBadges())
+                .build().encode().toUri();
         return
+                //wysłanie żądania typu POST RestTemplate.postForObject()
+                //request jest null, bo Trello narzuca nam wysyłanie parametrów przy pomocy query params
+                //trzeci argument to klasa CreatedTrelloCard na którą zostanie zmapowana odpowiedź serwera
                 restTemplate.postForObject(url, null, CreatedTrelloCard.class);
     }
 

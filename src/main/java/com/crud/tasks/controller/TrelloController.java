@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 //-> JSON
 //tworzy endpointy
+//controller służy do ręcznego testowania aplikacji
 @RestController
 
 @RequestMapping("/v1/trello")
@@ -33,13 +34,13 @@ public class TrelloController {
             System.out.println(trelloBoardDto.getName() + " - " + trelloBoardDto.getId());
             System.out.println("This board contains lists: ");
 
-            trelloBoardDto.getLists().forEach(trelloList ->
-                    System.out.println(trelloList.getName() + " - " + trelloList.getId() + " - " + trelloList.isClosed()));
-        });
+        trelloBoardDto.getLists().forEach(trelloList -> System.out.println(trelloList.getName() + " - " + trelloList.getId() + " - " + trelloList.isClosed()));
+       });
     }
 
     @RequestMapping(method = RequestMethod.GET,
     value = "getTrelloBoardsFilter")
+
     public List<TrelloBoardDto> getTrelloBoardsFilter() {
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
 
@@ -49,11 +50,11 @@ public class TrelloController {
 
         return trelloBoards.stream()
                 //.filter(trelloBoardDto -> trelloBoardDto.getName() != null && trelloBoardDto.getId() != null)
-                .filter(trelloBoardDto -> Optional.ofNullable(trelloBoardDto.getName()).orElse("Epty Board Name"))
+                //.map()
                 .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
                 .collect(Collectors.toList());
-
     }
+
 
     public void getTrelloBadges(){
         CreatedTrelloCard createdTrelloCard = trelloClient.createNewCard(new TrelloCardDto("111ooo", "222aaA", "top", "asd",
@@ -66,8 +67,10 @@ public class TrelloController {
         System.out.println(createdTrelloCard.getTrelloBadges().getAttachments().getTrello().getBoard());
     }
 
-    //przjmuje żądanie typu post
-    //korzysta z ciała żądania jako źródła danych i wywołuje metodę klient
+    //endpoint, który:
+    // przjmuje żądanie typu post korzysta z ciała żądania jako źródła danych  (w przeciwieństwie do Trello)
+    //  i wywoła metodę klienta Trello — createNewCard:
+
     @RequestMapping(method = RequestMethod.POST,
             value = "createTrelloCard")
     public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto){

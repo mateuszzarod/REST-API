@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
+//mapuje na obiekt, zwracany przez przez żadanie klienta
+//IgnoreProperties Mówi aplikacji, aby nie zwracać uwagi na parametry zawarte
+// w odpowiedzi JSON, jeżeli nie znajdują się w danej klasie jako pola
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

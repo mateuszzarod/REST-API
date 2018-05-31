@@ -19,6 +19,8 @@ public class TrelloBoardDto {
     private String name;
     @JsonProperty("id")
     private String id;
+
+    //to pole przechowuje listę klas TrelloListDto
     @JsonProperty("lists")
     private List<TrelloListDto> lists;
 

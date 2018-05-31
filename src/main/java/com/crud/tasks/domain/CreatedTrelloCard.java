@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+//klasa na którą mapujemy odpowiedź serwera aplikacji
+//finalna reprezentacją danych na temat utworzonego zadania
+//to co nam przyśle serwer mapujemy na wynik i za pomocą Jsona osbługujemy tylko interesujące nas pola
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
