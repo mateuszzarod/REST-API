@@ -51,7 +51,7 @@ public class TrelloController {
                 //.filter(trelloBoardDto -> trelloBoardDto.getName() != null && trelloBoardDto.getId() != null)
                 .filter(trelloBoardDto -> Optional.ofNullable(trelloBoardDto.getName()).orElse("Epty Board Name"))
                 .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
-                .collect(Collectors.toList())
+                .collect(Collectors.toList());
 
     }
 
