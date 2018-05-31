@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+//change server response for java object
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
