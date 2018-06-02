@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.*;
 
 //-> JSON
 //tworzy endpointy
 //controller służy do ręcznego testowania aplikacji
+//przetwarza zaptytania http -> client
 @RestController
 
 @RequestMapping("/v1/trello")
@@ -40,25 +40,26 @@ public class TrelloController {
 
     @RequestMapping(method = RequestMethod.GET,
     value = "getTrelloBoardsFilter")
-
     public List<TrelloBoardDto> getTrelloBoardsFilter() {
+
+
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
 
-        trelloBoards.forEach(trelloBoardDto -> {
-            System.out.println(trelloBoardDto.getName() + " - " + trelloBoardDto.getId());
-        });
-
-        return trelloBoards.stream()
-                //.filter(trelloBoardDto -> trelloBoardDto.getName() != null && trelloBoardDto.getId() != null)
-                //.map()
-                .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
+        return trelloClient.getTrelloBoards().stream()
+                .filter(trelloBoardDto -> nonNull(trelloBoardDto.getId()))
+                .filter(trelloBoardDto -> nonNull(trelloBoardDto.getName()))
+                .filter(t -> t.getName().contains("Kodilla"))
                 .collect(Collectors.toList());
-    }
 
+     /*   trelloBoards.forEach(trelloBoardDto -> {
+            System.out.println(trelloBoardDto.getName() + " - " + trelloBoardDto.getId());
+     */
+
+        }
 
     public void getTrelloBadges(){
         CreatedTrelloCard createdTrelloCard = trelloClient.createNewCard(new TrelloCardDto("111ooo", "222aaA", "top", "asd",
-                new TrelloBadges(1, new AttachmentByType(
+                new TrelloBadges(1, new AttachmentsByType(
                         new Trello(1,1)
                 )
                 )
@@ -76,6 +77,7 @@ public class TrelloController {
     public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto){
         return trelloClient.createNewCard(trelloCardDto);
     }
+}
 
 /*
     @RequestMapping(method = RequestMethod.POST,
@@ -83,17 +85,13 @@ public class TrelloController {
 */
 
 /*    public List<TrelloBoardDto> getTrelloBoards() {
-
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-
         return trelloClient.getTrelloBoards().stream()
                 .filter(t -> t.getName().contains("Kodilla"))
                 .filter(trelloBoardDto -> trelloBoardDto.getName() != null && trelloBoardDto.getId() != null)
                 .collect(Collectors.toList());
     }*/
 
-
-}
 
 
         /*(Wyzwanie - Trudne zadanie)

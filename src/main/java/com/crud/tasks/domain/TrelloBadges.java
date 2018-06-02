@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class TrelloBadges {
     @JsonProperty
     int votes;
-    @JsonProperty
-    AttachmentByType attachments;
+    @JsonProperty(value = "attachmentsByType")
+    AttachmentsByType attachments;
 }
