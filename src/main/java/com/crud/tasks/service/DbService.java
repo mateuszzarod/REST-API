@@ -36,9 +36,11 @@ public class DbService {
         return taskRepository.findById(id);
     }
 
+    //delete
     public void deleteTask(final Long id) {
         taskRepository.delete(id);
     }
+
 }
 
 
