@@ -12,4 +12,11 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AttachmentsByType {
     private Trello trello;
+
+    @Override
+    public String toString() {
+        return "AttachmentsByType{" +
+                "trello=" + trello +
+                '}';
+    }
 }

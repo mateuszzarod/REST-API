@@ -57,16 +57,20 @@ public class TrelloController {
 
         }
 
-    public void getTrelloBadges(){
-        CreatedTrelloCard createdTrelloCard = trelloClient.createNewCard(new TrelloCardDto("111ooo", "222aaA", "top", "asd",
-                new TrelloBadges(1, new AttachmentsByType(
-                        new Trello(1,1)
-                )
-                )
-        ));
+
+    /*public void getTrelloBadges(){
+        CreatedTrelloCard createdTrelloCard = trelloClient.createNewCard(new TrelloCardDto(
+                "111ooo",
+                "222aaA",
+                "top",
+                "asd",
+                new TrelloBadges(1, new AttachmentsByType(new Trello(1,1)))
+                ));
+
         System.out.println(createdTrelloCard.getTrelloBadges().getVotes());
         System.out.println(createdTrelloCard.getTrelloBadges().getAttachments().getTrello().getBoard());
     }
+*/
 
     //endpoint, który:
     // przjmuje żądanie typu post korzysta z ciała żądania jako źródła danych  (w przeciwieństwie do Trello)

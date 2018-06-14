@@ -16,4 +16,12 @@ public class TrelloBadges {
     int votes;
     @JsonProperty(value = "attachmentsByType")
     AttachmentsByType attachments;
+
+    @Override
+    public String toString() {
+        return "TrelloBadges{" +
+                "votes=" + votes +
+                ", attachments=" + attachments +
+                '}';
+    }
 }

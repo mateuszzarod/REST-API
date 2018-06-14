@@ -16,4 +16,12 @@ public class Trello {
     int board;
     @JsonProperty
     int card;
+
+    @Override
+    public String toString() {
+        return "Trello{" +
+                "board=" + board +
+                ", card=" + card +
+                '}';
+    }
 }

@@ -31,7 +31,6 @@ import static java.util.Optional.ofNullable;
 @Component
 public class TrelloClient {
 
-
     private final static Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
 
     @Autowired
@@ -78,7 +77,6 @@ public class TrelloClient {
                 .queryParam("desc", trelloCardDto.getDescription())
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId())
-                .queryParam("badge", trelloCardDto.getBadges())
                 .build().encode().toUri();
         return
                 //wysłanie żądania typu POST RestTemplate.postForObject()

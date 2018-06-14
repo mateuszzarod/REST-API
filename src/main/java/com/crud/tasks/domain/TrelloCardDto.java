@@ -18,5 +18,4 @@ public class TrelloCardDto {
     private String pos;
     private String listId;
     private TrelloBadges badges;
-
 }
