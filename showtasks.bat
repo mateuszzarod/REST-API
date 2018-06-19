@@ -13,6 +13,8 @@ goto fail
 :stoptomcat
 call %CATALINA_HOME%\bin\shutdown.bat
 
+
+
 :fail
 echo.
 echo There were errors.
